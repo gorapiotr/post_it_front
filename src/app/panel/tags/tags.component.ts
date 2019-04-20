@@ -29,7 +29,6 @@ export class TagsComponent implements OnInit {
   }
 
   refreshTags(refresh: boolean) {
-    console.log(refresh);
     if (refresh) {
       this.getData();
     }
@@ -37,6 +36,6 @@ export class TagsComponent implements OnInit {
   }
 
   selectTag(tag) {
-    this.selectedTag = tag;
+    this.selectedTag = this.selectedTag === tag ? null : tag;
   }
 }

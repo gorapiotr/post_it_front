@@ -12,13 +12,13 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="btn btn-secondary mr-2">
+      <div class="btn btn-secondary mr-2" (click)="remove()">
         <span class="fa fa-trash"></span>
       </div>
     </div>
     <div class="col">
-      <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid">
-        {{ !sending ? 'Save' : 'Sending'}}
+      <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid || sending">
+        Save
       </button>
       <div class="btn btn-secondary ml-1" (click)="cancel()">
         Cancel

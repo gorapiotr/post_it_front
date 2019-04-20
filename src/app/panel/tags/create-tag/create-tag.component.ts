@@ -33,6 +33,7 @@ export class CreateTagComponent implements OnInit {
     this.tagService.create(this.formGroup.value).subscribe((data: any) => {
       this.sending = false;
       if (data.success) {
+        this.formGroup.controls['name'].setValue('');
         this.tagCreated.emit(data.success);
       }
     });

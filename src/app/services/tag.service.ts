@@ -24,6 +24,10 @@ export class TagService {
   edit(data: any): Observable<any> {
     return this.http.put(this.url, data);
   }
+
+  remove(data: any): Observable<any> {
+    return this.http.delete(this.url, {params: {id: data.id}});
+  }
 }
 
 interface Response {
