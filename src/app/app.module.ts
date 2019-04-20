@@ -7,6 +7,7 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LayoutModule} from "./layout/layout.module";
 import {PanelModule} from "./panel/panel.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import {PanelModule} from "./panel/panel.module";
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
 
         LayoutModule,
         PanelModule

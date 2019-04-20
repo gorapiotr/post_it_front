@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NoteService} from "../../services/note.service";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+    loading = true;
+    data: any;
 
-  ngOnInit() {
-  }
+    constructor(private noteService: NoteService) {
+    }
+
+    ngOnInit() {
+        this.noteService.getAll().subscribe((item: any) => {
+            this.data = item.data;
+            this.loading = false;
+        });
+    }
 
 }
