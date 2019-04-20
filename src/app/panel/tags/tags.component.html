@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <app-create-tag (tagCreated)="refreshTags($event)" ></app-create-tag>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8" *ngIf="!loading else Loading">
+            <ng-container *ngFor="let item of data">
+                <div class="btn btn-outline-primary mr-1 mt-1" (click)="selectTag(item)">
+                    {{item.name}}
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col" *ngIf="selectedTag">
+            <app-edit-tag [tag]="selectedTag" (tagEdited)="refreshTags($event)"></app-edit-tag>
+        </div>
+    </div>
+</div>
+
+<ng-template #Loading>
+    <p>Loading</p>
+</ng-template>

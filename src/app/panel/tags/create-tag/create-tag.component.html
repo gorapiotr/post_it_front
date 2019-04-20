@@ -1,0 +1,20 @@
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col">
+      <h5>Create new tag:</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <div class="form-group">
+        <input type="text" class="form-control" id="createTag" formControlName="name">
+      </div>
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary" [disabled]="formGroup.invalid">
+        {{ !sending ? 'Create' : 'Sending'}}
+      </button>
+    </div>
+  </div>
+</form>

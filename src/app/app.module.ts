@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LayoutModule} from "./layout/layout.module";
 import {PanelModule} from "./panel/panel.module";
 import {HttpClientModule} from "@angular/common/http";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -15,14 +16,10 @@ import {HttpClientModule} from "@angular/common/http";
         LoginComponent,
     ],
     imports: [
-        BrowserModule,
         AppRoutingModule,
-        BrowserModule,
         AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
         HttpClientModule,
-
+        SharedModule,
         LayoutModule,
         PanelModule
     ],

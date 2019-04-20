@@ -1,0 +1,28 @@
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col">
+      <h5>Edit tag:</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <div class="form-group">
+        <input type="text" class="form-control" id="editTag" formControlName="name">
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="btn btn-secondary mr-2">
+        <span class="fa fa-trash"></span>
+      </div>
+    </div>
+    <div class="col">
+      <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid">
+        {{ !sending ? 'Save' : 'Sending'}}
+      </button>
+      <div class="btn btn-secondary ml-1" (click)="cancel()">
+        Cancel
+      </div>
+    </div>
+  </div>
+</form>
