@@ -49,7 +49,7 @@
                     <div class="card-body">
                         <div class="card-text" [innerHTML]="comment.text"></div>
                         <div class="text-right text-muted font-italic">
-                            <span class="fa fa-trash" *ngIf="comment.author_id === userId"></span><br>
+                            <span class="fa fa-trash" *ngIf="comment.author_id === userId" (click)="removeComment(comment)"></span><br>
                             {{comment.author}} (Timestamp)!!!
                         </div>
 

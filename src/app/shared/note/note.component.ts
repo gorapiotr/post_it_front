@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {NoteService} from "../../services/note.service";
+import {CommentService} from "../../services/comment.service";
 
 @Component({
   selector: 'app-note',
@@ -16,9 +17,10 @@ export class NoteComponent implements OnInit {
 
 
   constructor(private authService: AuthService,
-              private noteService: NoteService
-
-  ) { }
+              private noteService: NoteService,
+              private commentService: CommentService
+  ) {
+  }
 
   ngOnInit() {
     this.userId = this.authService.getAuthId();
@@ -37,6 +39,16 @@ export class NoteComponent implements OnInit {
     this.noteService.remove(this.item).subscribe((data: any) => {
       if (data.success) {
         this.noteRemoved.emit(data.success);
+      }
+    });
+  }
+
+  removeComment(comment) {
+    this.commentService.remove(comment).subscribe((data: any) => {
+      if (data.success) {
+        this.item.comments = this.item.comments.filter((item) => {
+          return item.id !== comment.id;
+        });
       }
     });
   }

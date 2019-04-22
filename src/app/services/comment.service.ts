@@ -15,6 +15,10 @@ export class CommentService {
   create(data, noteId): Observable<any> {
     return this.http.post<Response>(this.url, {text: data.text, note_id: noteId});
   }
+
+  remove(data: any): Observable<any> {
+    return this.http.delete(this.url, {params: {id: data.id}});
+  }
 }
 
 interface Response {
