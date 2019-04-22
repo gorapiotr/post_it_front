@@ -13,6 +13,10 @@ export class NoteService {
   getAll(): Observable<any> {
     return this.http.get<Response>('notes');
   }
+
+  create(data): Observable<any> {
+    return this.http.post<Response>('notes', data);
+  }
 }
 
 interface Response {

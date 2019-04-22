@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -7,6 +7,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./new-position.component.scss']
 })
 export class NewPositionComponent implements OnInit {
+
+  @Output() newPosition: EventEmitter<any> = new EventEmitter<any>();
 
   formGroup: FormGroup;
 
@@ -19,11 +21,12 @@ export class NewPositionComponent implements OnInit {
 
   private createForm() {
     this.formGroup = this.fb.group({
-      text: ['', Validators.required]
+      text: ['', Validators.required],
+      done: [false, Validators.required]
     });
   }
 
   onSubmit() {
-    console.log(this.formGroup.value);
+    this.newPosition.emit(this.formGroup.value);
   }
 }

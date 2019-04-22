@@ -1,17 +1,41 @@
-<!--<div class="col-12">-->
-<!--    <h5>Add positions to the list:</h5>-->
-<!--</div>-->
-<!--<div class="col-12">-->
-<!--    <div class="form-group">-->
-<!--        <app-manage-positions></app-manage-positions>-->
-<!--    </div>-->
-<!--</div>-->
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-8" formGroupName="positions" (mouseleave)="showInput(null)">
+            <ng-container *ngFor="let position of formGroup.get('positions').controls; let i = index">
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div [formGroupName]="i">
+                            <div class="d-flex justify-content-between">
+                                <div (mouseenter)="showInput(i)" style="width: 100%">
+                                    <div [hidden]="!(showInputVar === i)">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" formControlName="text">
+                                        </div>
+                                    </div>
+                                    <strong [ngStyle]="formGroup.value.positions[i].done && {'text-decoration': 'line-through'}"
+                                            [hidden]="!(showInputVar !== i)">
+                                        {{ formGroup.value.positions[i].text }}
+                                    </strong>
+                                </div>
+                                <div>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="done">
+                                            Done:
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" id="done"
+                                               formControlName="done">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-4">
+            <app-new-position (newPosition)="pushNewPosition($event)"></app-new-position>
+        </div>
+    </div>
+</form>
 
-<div class="row">
-    <div class="col-8">
-        <p> manage positions</p>
-    </div>
-    <div class="col-4">
-        <app-new-position></app-new-position>
-    </div>
-</div>
+<pre>{{formGroup.value | json }}</pre>

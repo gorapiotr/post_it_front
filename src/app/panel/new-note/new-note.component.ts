@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TagService} from "../../services/tag.service";
+import {NoteService} from "../../services/note.service";
 
 @Component({
   selector: 'app-new-note',
@@ -8,6 +9,9 @@ import {TagService} from "../../services/tag.service";
   styleUrls: ['./new-note.component.scss']
 })
 export class NewNoteComponent implements OnInit {
+
+  formStep = FormSteps.MANAGE_POSITIONS;
+  formSteps = FormSteps;
 
   dropdownList = [];
   selectedItems = [];
@@ -26,7 +30,8 @@ export class NewNoteComponent implements OnInit {
   sending = false;
 
   constructor(private fb: FormBuilder,
-              private tagsService: TagService) {
+              private tagsService: TagService,
+              private noteService: NoteService) {
   }
 
   ngOnInit() {
@@ -50,15 +55,21 @@ export class NewNoteComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formGroup.value);
+    this.noteService.create(this.formGroup.value).subscribe(
+        data => this.handleResponse(data),
+        error => this.handleError(error));
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
+  handleResponse(data) {
+    this.formStep = FormSteps.MANAGE_POSITIONS;
   }
 
-  onSelectAll(items: any) {
-    console.log(items);
+  handleError(error) {
+    console.log(error);
   }
+}
 
+enum FormSteps {
+  CREATE = 'create',
+  MANAGE_POSITIONS = 'positions'
 }
