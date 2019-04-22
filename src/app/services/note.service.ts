@@ -14,6 +14,14 @@ export class NoteService {
     return this.http.get<Response>('notes');
   }
 
+  get(id: number): Observable<any> {
+    return this.http.get<Response>('notes/' + id);
+  }
+
+  edit(data: any): Observable<any> {
+    return this.http.put('notes', data);
+  }
+
   create(data): Observable<any> {
     return this.http.post<Response>('notes', data);
   }

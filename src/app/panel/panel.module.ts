@@ -6,14 +6,12 @@ import {TagsComponent} from './tags/tags.component';
 import {CreateTagComponent} from './tags/create-tag/create-tag.component';
 import {EditTagComponent} from './tags/edit-tag/edit-tag.component';
 import {NewNoteComponent} from "./new-note/new-note.component";
-import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 @NgModule({
   declarations: [DashboardComponent, TagsComponent, CreateTagComponent, EditTagComponent, NewNoteComponent],
   imports: [
     CommonModule,
-    SharedModule,
-    NgMultiSelectDropDownModule
+    SharedModule
   ]
 })
 export class PanelModule {

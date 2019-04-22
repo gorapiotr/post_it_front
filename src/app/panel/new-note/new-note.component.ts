@@ -10,26 +10,20 @@ import {NoteService} from "../../services/note.service";
 })
 export class NewNoteComponent implements OnInit {
 
+  note = {
+    title: '',
+    description: '',
+    tags: []
+  };
+
   noteId: null | number;
   positions: any[];
   formStep = FormSteps.CREATE;
   formSteps = FormSteps;
+  tags: any;
 
-  dropdownList = [];
-  selectedItems = [];
-  dropdownSettings = {
-    singleSelection: false,
-    idField: 'id',
-    textField: 'name',
-    selectAllText: 'Select All',
-    unSelectAllText: 'UnSelect All',
-    itemsShowLimit: 3,
-    allowSearchFilter: true
-  };
   loading = true;
 
-  formGroup: FormGroup;
-  sending = false;
 
   constructor(private fb: FormBuilder,
               private tagsService: TagService,
@@ -37,33 +31,24 @@ export class NewNoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createForm();
     this.getTags();
   }
 
   private getTags() {
     this.tagsService.getAll().subscribe((tags) => {
-      this.dropdownList = tags.data;
+      this.tags = tags.data;
       this.loading = false;
     });
   }
 
-  private createForm() {
-    this.formGroup = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      tags: ['']
-    });
-  }
-
-  onSubmit() {
-    this.noteService.create(this.formGroup.value).subscribe(
+  createNote(data) {
+    console.log('saaa');
+    this.noteService.create(data).subscribe(
         data => this.handleResponse(data),
         error => this.handleError(error));
   }
 
   handleResponse(data) {
-    console.log(data);
     this.positions = data.data.positions;
     this.noteId = data.data.id;
     this.formStep = FormSteps.MANAGE_POSITIONS;
@@ -74,7 +59,8 @@ export class NewNoteComponent implements OnInit {
   }
 }
 
-enum FormSteps {
+export enum FormSteps {
   CREATE = 'create',
-  MANAGE_POSITIONS = 'positions'
+  MANAGE_POSITIONS = 'positions',
+  EDIT = 'edit'
 }

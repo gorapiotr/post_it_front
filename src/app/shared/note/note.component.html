@@ -10,7 +10,7 @@
                           aria-expanded="false">
                     </span>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item">Edit</a>
+                        <a class="dropdown-item" [routerLink]="['/notes', item.id]">Edit</a>
                         <a class="dropdown-item">Delete</a>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
     <div class="card-body">
         <div class="text-right">
             <ng-container *ngFor="let tag of item.tags">
-                <div class="d-inline btn btn-outline-primary ml-1">{{tag}}</div>
+                <div class="d-inline btn btn-outline-primary ml-1">{{tag.name}}</div>
             </ng-container>
         </div>
         <hr>

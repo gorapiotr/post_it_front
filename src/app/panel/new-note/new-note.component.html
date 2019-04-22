@@ -1,52 +1,12 @@
-<ng-container [ngSwitch]="formStep">
+<ng-container [ngSwitch]="formStep" *ngIf="!loading else Loading;">
     <ng-container *ngSwitchCase="formSteps.CREATE">
-        <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()" *ngIf="!loading else Loading;">
-            <div class="row">
-                <div class="col">
-                    <h5>Create new note:</h5>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-8">
-                    <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input type="text" class="form-control" id="title" formControlName="title">
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="form-group">
-                        <label for="description">Short description:</label>
-                        <input type="text" class="form-control" id="description" formControlName="description">
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="form-group">
-                        <label for="description">Select tags:</label>
-                        <ng-multiselect-dropdown
-                                [placeholder]="'Select tags'"
-                                [data]="dropdownList"
-                                [(ngModel)]="selectedItems"
-                                [settings]="dropdownSettings"
-                                formControlName="tags"
-                        >
-                        </ng-multiselect-dropdown>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-secondary" [disabled]="formGroup.invalid">
-                        {{ !sending ? 'Create' : 'Sending'}}
-                    </button>
-                </div>
-            </div>
-        </form>
+        <app-basic-note-form (createNote)="createNote($event)" [data]="note" [tags]="tags"></app-basic-note-form>
     </ng-container>
 
     <ng-container *ngSwitchCase="formSteps.MANAGE_POSITIONS">
         <app-manage-positions *ngIf="noteId" [positions]="positions" [noteId]="noteId"></app-manage-positions>
     </ng-container>
 </ng-container>
-
 
 <ng-template #Loading>
     <p>Loading</p>

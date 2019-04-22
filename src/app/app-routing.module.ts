@@ -6,6 +6,7 @@ import {DashboardComponent} from "./panel/dashboard/dashboard.component";
 import {TagsComponent} from "./panel/tags/tags.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {NewNoteComponent} from "./panel/new-note/new-note.component";
+import {EditNoteComponent} from "./shared/edit-note/edit-note.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
     path: '', component: PanelLayoutComponent, children: [
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
       {path: 'tags', component: TagsComponent, canActivate: [AuthGuard]},
-      {path: 'new-note', component: NewNoteComponent, canActivate: [AuthGuard]}
+      {path: 'new-note', component: NewNoteComponent, canActivate: [AuthGuard]},
+      {path: 'notes/:id', component: EditNoteComponent, canActivate: [AuthGuard]}
     ]
   },
   {path:'**', redirectTo: 'login', pathMatch: 'full'}
