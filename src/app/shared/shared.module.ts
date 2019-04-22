@@ -11,9 +11,10 @@ import {BasicNoteFormComponent} from './basic-note-form/basic-note-form.componen
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { EditNoteComponent } from './edit-note/edit-note.component';
 import {RouterModule} from "@angular/router";
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
-    declarations: [NoteComponent, AddNewCommentComponent, ManagePositionsComponent, NewPositionComponent, BasicNoteFormComponent, EditNoteComponent],
+    declarations: [NoteComponent, AddNewCommentComponent, ManagePositionsComponent, NewPositionComponent, BasicNoteFormComponent, EditNoteComponent, SearchBarComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -31,6 +32,7 @@ import {RouterModule} from "@angular/router";
         BrowserModule,
         ManagePositionsComponent,
         BasicNoteFormComponent,
+        SearchBarComponent
     ]
 })
 export class SharedModule {

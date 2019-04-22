@@ -101,4 +101,6 @@ export class ManagePositionsComponent implements OnInit {
   private navigateTo() {
     this.router.navigate(['/dashboard']);
   }
+
+  get formData() { return <FormArray>this.formGroup.get('positions'); }
 }

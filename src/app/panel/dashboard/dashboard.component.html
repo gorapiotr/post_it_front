@@ -1,5 +1,10 @@
-<div class="container">
-    <div class="row" *ngIf="!loading else Loading">
+<div class="container" *ngIf="!loading else Loading">
+    <div class="row">
+        <div class="col-8 mb-2">
+            <app-search-bar [data]="data" (filteredData)="filteredData($event)"></app-search-bar>
+        </div>
+    </div>
+    <div class="row">
         <ng-container *ngFor="let item of data">
             <div class="col-6 mb-5">
                 <app-note [item]="item"></app-note>

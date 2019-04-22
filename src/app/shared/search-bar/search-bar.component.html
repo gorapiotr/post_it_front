@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-between">
+    <div style="width: 100%">
+        <ng-multiselect-dropdown
+                [placeholder]="'Select tags'"
+                [data]="dropdownList"
+                [(ngModel)]="selectedItems"
+                [settings]="dropdownSettings"
+        >
+        </ng-multiselect-dropdown>
+    </div>
+    <div>
+        <div class="btn btn-primary ml-2" (click)="search()">Search</div>
+    </div>
+</div>
+

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-8">
             <div formGroupName="positions" (mouseleave)="showInput(null)">
-                <ng-container *ngFor="let position of formGroup.get('positions').controls; let i = index">
+                <ng-container *ngFor="let position of formData.controls; let i = index">
                     <div class="card mb-1">
                         <div class="card-body">
                             <div [formGroupName]="i">
