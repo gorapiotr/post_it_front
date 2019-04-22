@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {PositionService} from "../../services/position.service";
+import {combineLatest} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-manage-positions',
@@ -8,29 +11,16 @@ import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 })
 export class ManagePositionsComponent implements OnInit {
 
+
+  @Input() positions: any[];
+  @Input() noteId: number;
   showInputVar = null;
-
-  data = {
-    options: [
-      {
-        id: 1,
-        text: 'Option 1',
-        done: true
-      },
-      {
-        id: 2,
-        text: 'Option 2',
-        done: false
-      }
-    ]
-  };
-
-
-  @Input() positions: any = [];
 
   formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private positionService: PositionService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -46,7 +36,7 @@ export class ManagePositionsComponent implements OnInit {
 
   patch() {
     const control = <FormArray>this.formGroup.get('positions');
-    this.data.options.forEach(x => {
+    this.positions.forEach(x => {
       control.push(this.patchValues(x.text, x.done, x.id));
     });
   }
@@ -66,5 +56,49 @@ export class ManagePositionsComponent implements OnInit {
 
   showInput(value) {
     this.showInputVar = value;
+  }
+
+  onSubmit() {
+
+    const newPositions = this.formGroup.value.positions.filter((item) => {
+      return item.id === null;
+    });
+
+    const editedPositions = this.formGroup.value.positions.filter((item) => {
+      return item.id != null;
+    });
+
+    if (newPositions.length && editedPositions.length) {
+      combineLatest(this.editPositions(editedPositions), this.createPositions(newPositions)).subscribe(([editedResp, newResp]) => {
+        console.log('add and edit');
+        this.navigateTo();
+      });
+    }
+
+    if (newPositions.length && !editedPositions.length) {
+      this.createPositions(newPositions).subscribe((resp) => {
+        console.log('only addd');
+        this.navigateTo();
+      });
+    }
+
+    if (!newPositions.length && editedPositions.length) {
+      this.editPositions(editedPositions).subscribe((resp) => {
+        console.log('only edit');
+        this.navigateTo();
+      });
+    }
+  }
+
+  editPositions(editedPositions) {
+    return this.positionService.edit(editedPositions);
+  }
+
+  createPositions(newPositions) {
+    return this.positionService.create(this.noteId, newPositions);
+  }
+
+  private navigateTo() {
+    this.router.navigate(['/dashboard']);
   }
 }

@@ -43,7 +43,7 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="formSteps.MANAGE_POSITIONS">
-        <app-manage-positions></app-manage-positions>
+        <app-manage-positions *ngIf="noteId" [positions]="positions" [noteId]="noteId"></app-manage-positions>
     </ng-container>
 </ng-container>
 

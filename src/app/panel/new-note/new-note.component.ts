@@ -10,7 +10,9 @@ import {NoteService} from "../../services/note.service";
 })
 export class NewNoteComponent implements OnInit {
 
-  formStep = FormSteps.MANAGE_POSITIONS;
+  noteId: null | number;
+  positions: any[];
+  formStep = FormSteps.CREATE;
   formSteps = FormSteps;
 
   dropdownList = [];
@@ -61,6 +63,9 @@ export class NewNoteComponent implements OnInit {
   }
 
   handleResponse(data) {
+    console.log(data);
+    this.positions = data.data.positions;
+    this.noteId = data.data.id;
     this.formStep = FormSteps.MANAGE_POSITIONS;
   }
 
