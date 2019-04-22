@@ -11,7 +11,7 @@ export class NoteService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get<Response>('http://localhost:80/api/notes');
+    return this.http.get<Response>('notes');
   }
 }
 

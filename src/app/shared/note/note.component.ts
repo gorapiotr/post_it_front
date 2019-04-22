@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-note',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoteComponent implements OnInit {
 
+  @Input() item: any;
+  comments = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showComments() {
+    this.comments = !this.comments;
   }
 
 }

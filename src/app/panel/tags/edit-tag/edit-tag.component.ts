@@ -9,6 +9,7 @@ import {TagService} from "../../../services/tag.service";
 })
 export class EditTagComponent implements OnInit, OnChanges {
 
+  errors: string[] | null;
   @Input() tag: any;
   @Output() tagEdited: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -39,12 +40,23 @@ export class EditTagComponent implements OnInit, OnChanges {
 
   onSubmit() {
     this.sending = true;
-    this.tagService.edit(this.formGroup.value).subscribe((data: any) => {
-      this.sending = false;
-      if (data.success) {
-        this.tagEdited.emit(data.success);
-      }
-    });
+    this.errors = null;
+    this.tagService.edit(this.formGroup.value).subscribe(
+        data => this.handleResponse(data),
+        error => this.handleError(error)
+    );
+  }
+
+  private handleResponse(data) {
+    this.sending = false;
+    if (data.success) {
+      this.tagEdited.emit(data.success);
+    }
+  }
+
+  private handleError(error) {
+    this.sending = false;
+    this.errors = error.errors.name;
   }
 
   remove() {

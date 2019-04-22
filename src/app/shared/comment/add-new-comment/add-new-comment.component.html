@@ -1,0 +1,15 @@
+<ng-container *ngIf="showForm else CreateCommetButton">
+    <div class="mt-2">
+        <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+            <textarea [froalaEditor]="leadOptions" formControlName="text" [(froalaModel)]="formGroup.text"></textarea>
+            <button type="submit" class="btn btn-primary mt-1 mr-1" [disabled]="formGroup.invalid">
+                Save
+            </button>
+            <div class="btn btn-secondary mt-1" (click)="changeState()">Cancel</div>
+        </form>
+    </div>
+</ng-container>
+
+<ng-template #CreateCommetButton>
+    <div class="btn btn-primary" (click)="changeState()">Add comment</div>
+</ng-template>

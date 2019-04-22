@@ -16,7 +16,10 @@
         <span class="fa fa-trash"></span>
       </div>
     </div>
-    <div class="col">
+    <div class="col-8">
+      <div *ngFor="let error of errors" class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
       <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid || sending">
         Save
       </button>

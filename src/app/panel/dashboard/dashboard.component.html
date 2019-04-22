@@ -1,49 +1,8 @@
 <div class="container">
     <div class="row" *ngIf="!loading else Loading">
         <ng-container *ngFor="let item of data">
-            <div class="col-4">
-                <div class="card text-center">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                {{item.title}}
-                            </div>
-                            <div>
-                                <div class="dropleft">
-                                    <span class="fa fa-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </span>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item">Edit</a>
-                                        <a class="dropdown-item">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="text-right">
-                            <ng-container *ngFor="let tag of item.tags">
-                                <div class="d-inline btn btn-outline-primary ml-1">{{tag}}</div>
-                            </ng-container>
-                        </div>
-                        <hr>
-                        <h5 class="card-title text-left">{{item.description}}</h5>
-                        <ul class="list-group text-left" *ngFor="let position of item.positions">
-                            <li class="list-group-item">{{position.text}}</li>
-                        </ul>
-                    </div>
-
-                    <div class="card-footer text-muted">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <i class="fa fa-comments" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                Created by: {{item.author.name | titlecase}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-6 mb-5">
+                <app-note [item]="item"></app-note>
             </div>
         </ng-container>
     </div>

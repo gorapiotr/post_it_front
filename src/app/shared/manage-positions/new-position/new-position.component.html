@@ -1,0 +1,16 @@
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col">
+      <h5>Add new position to the list:</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <div class="form-group">
+        <label for="text">Text:</label>
+        <input type="text" class="form-control" id="text" formControlName="text">
+      </div>
+    </div>
+  </div>
+</form>

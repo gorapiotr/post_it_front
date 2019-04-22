@@ -1,1 +1,60 @@
+<div class="card text-center">
+    <div class="card-header">
+        <div class="d-flex justify-content-between">
+            <div>
+                {{item.title}}
+            </div>
+            <div>
+                <div class="dropleft">
+                    <span class="fa fa-cog" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                    </span>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item">Edit</a>
+                        <a class="dropdown-item">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="text-right">
+            <ng-container *ngFor="let tag of item.tags">
+                <div class="d-inline btn btn-outline-primary ml-1">{{tag}}</div>
+            </ng-container>
+        </div>
+        <hr>
+        <h5 class="card-title text-left">{{item.description}}</h5>
+        <ul class="list-group text-left" *ngFor="let position of item.positions">
+            <li class="list-group-item">{{position.text}}</li>
+        </ul>
+    </div>
 
+    <div class="card-footer text-muted">
+        <div class="d-flex justify-content-between" (click)="showComments()">
+            <div>
+                <i class="fa fa-comments mr-2" aria-hidden="true"></i>
+                <span class="badge badge-pill badge-primary">{{item.comments.length}}</span>
+            </div>
+            <div>
+                Created by: {{item.author.name | titlecase}}
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body" *ngIf="comments">
+        <div class="text-left">
+            <ng-container *ngFor="let comment of item.comments">
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <p class="card-text">{{comment.text}}</p>
+                        <div class="text-right text-muted font-italic">
+                            {{comment.author}} (Timestamp)!!!
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <app-add-new-comment></app-add-new-comment>
+        </div>
+    </div>
+</div>
