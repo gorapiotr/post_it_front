@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TagService} from "../../../services/tag.service";
+import {CommentService} from "../../../services/comment.service";
+import {NoteService} from "../../../services/note.service";
 
 @Component({
   selector: 'app-add-new-comment',
@@ -8,6 +9,10 @@ import {TagService} from "../../../services/tag.service";
   styleUrls: ['./add-new-comment.component.scss']
 })
 export class AddNewCommentComponent implements OnInit {
+
+  @Input() noteId;
+  @Output() reloadComments: EventEmitter<any> = new EventEmitter<any>();
+  sending = false;
 
   showForm = false;
 
@@ -21,7 +26,10 @@ export class AddNewCommentComponent implements OnInit {
 
   formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private commentService: CommentService,
+              private noteService: NoteService
+  ) {
   }
 
   ngOnInit() {
@@ -35,7 +43,23 @@ export class AddNewCommentComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formGroup.value);
+    this.sending = true;
+    this.commentService.create(this.formGroup.value, this.noteId).subscribe(
+        data => this.handleResponse(data),
+        error => this.handleError(error));
+  }
+
+  handleResponse(data) {
+    this.noteService.getComments(this.noteId).subscribe((data) => {
+      this.reloadComments.emit(data);
+      this.sending = false;
+      this.showForm = false;
+    });
+  }
+
+  handleError(error) {
+    this.sending = false;
+    console.log(error);
   }
 
   changeState() {

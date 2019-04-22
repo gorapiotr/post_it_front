@@ -42,7 +42,6 @@ export class NewNoteComponent implements OnInit {
   }
 
   createNote(data) {
-    console.log('saaa');
     this.noteService.create(data).subscribe(
         data => this.handleResponse(data),
         error => this.handleError(error));

@@ -9,7 +9,7 @@
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <app-basic-note-form (editNote)="editNote($event)" [data]="note" [tags]="tags"></app-basic-note-form>
+      <app-basic-note-form (editNote)="editNote($event)" [data]="note" [tags]="tags" [edit]="true"></app-basic-note-form>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <app-manage-positions *ngIf="noteId" [positions]="positions" [noteId]="noteId"></app-manage-positions>

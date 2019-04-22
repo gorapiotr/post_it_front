@@ -1,6 +1,6 @@
 <ng-container [ngSwitch]="formStep" *ngIf="!loading else Loading;">
     <ng-container *ngSwitchCase="formSteps.CREATE">
-        <app-basic-note-form (createNote)="createNote($event)" [data]="note" [tags]="tags"></app-basic-note-form>
+        <app-basic-note-form (createNote)="createNote($event)" [data]="note" [tags]="tags" [edit]="false"></app-basic-note-form>
     </ng-container>
 
     <ng-container *ngSwitchCase="formSteps.MANAGE_POSITIONS">

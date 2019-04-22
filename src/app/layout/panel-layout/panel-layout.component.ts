@@ -19,6 +19,7 @@ export class PanelLayoutComponent implements OnInit {
 
   logout() {
     this.authService.changeAuthStatus(false);
+    this.authService.removeAuthId();
     this.tokenService.remove();
     this.router.navigateByUrl('/login');
   }

@@ -16,6 +16,10 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getData();
+    }
+
+    private getData() {
         this.noteService.getAll().subscribe((item: any) => {
             this.data = item.data;
             this.originalData = item.data;

@@ -11,5 +11,5 @@
 </ng-container>
 
 <ng-template #CreateCommetButton>
-    <div class="btn btn-primary" (click)="changeState()">Add comment</div>
+    <button class="btn btn-primary" (click)="changeState()" [disabled]="sending">Add comment</button>
 </ng-template>

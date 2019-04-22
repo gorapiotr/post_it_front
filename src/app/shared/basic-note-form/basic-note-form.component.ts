@@ -49,6 +49,6 @@ export class BasicNoteFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.edit ? this.createNote.emit(this.formGroup.value) : this.editNote.emit(this.formGroup.value);
+    this.edit ? this.editNote.emit(this.formGroup.value) : this.createNote.emit(this.formGroup.value);
   }
 }
